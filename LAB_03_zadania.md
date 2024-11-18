@@ -69,11 +69,11 @@ update przetwory SET id_przetworu= '1' WHERE id_przetworu='2';
 ### Zadanie.5
 ##### .1
 ```
-insert into postac values ( 1,'Jorn', 'wiking', 1580, 444);
-insert into postac values ( 2,'Horn', 'wiking', default, default );
-insert into postac values ( 3,'Worn', 'wiking', 1544, 480);
-insert into postac values ( 4,'Torn', 'wiking', 1590, 434);
-insert into postac values ( 5,'Wladek', 'wiking', 1680, 344);
+insert into postac values ( 4,'Jorn', 'wiking', 1580, 444);
+insert into postac values ( 5,'Horn', 'wiking', default, default );
+insert into postac values ( 6,'Worn', 'wiking', 1544, 480);
+insert into postac values ( 7,'Torn', 'wiking', 1590, 434);
+insert into postac values ( 8,'Wladek', 'wiking', 1680, 344);
 ```
 ##### .2
 ```
