@@ -1,50 +1,72 @@
-SELECT * FROM infs_stepczykm.postac;
-alter table postac add pesel CHAR(11) first;
-alter table postac add primary key(pesel);
-update postac set pesel=12345678912 where nazwa='Bjorn';
-update postac set pesel=21372137213 where nazwa='Drozd';
-update postac set pesel=22222222222 where nazwa='Tesciowa';
-update postac set pesel=12121212121 where nazwa='Horn';
-alter table postac modify rodzaj enum('wiking', 'kobieta','ptak','syrena');
-insert into postac (32323232323, default, Gertruda Nieszczera, syrena, default, default);
-select nazwa from postac where nazwa like '%a%';
-# % - dowolny ciąg znakówith
-# _ - dokl
-update postac set state
 
-
-
-
-# pkt c
-alter table postac add check(wiek <= 1000);
-# check (warunek na kolumnie lub kolumnach) 
-# zad 4 b
-# sposób 1
-#krok 1 - kopia struktury
-create table marynarz like postac;
-# krok 2 - kopia danych
-insert into marynarz select*from postac where statek is not null; # lub <> roóżny od
-#sposób 2 - create table as select
-create table marynarz as select*from postac;\
-
-
-
-SELECT * FROM infs_stepczykm.postac;
-# Lab 4 zad.1
-
-#krok 1- usunięcie klucza głównego
+# LAB 4
+## Zadanie 1
+```
+ a)
+delete from postac where id_postaci=6 or id_postaci=4;
+ b)
+alter table przetwory drop foreign key przetwory_ibfk_1;
+alter table przetwory drop foreign key przetwory_ibfk_2;
+alter table walizka drop foreign key walizka_ibfk_1;
+alter table postac change id_postaci id_postaci int;
 alter table postac drop primary key;
-#krok 2- 1 się nie powiódł tym razem
-alter table postac modify id_postaci int;
+```
 
-#krok 2 - krok 1 się nie powiódł tym razem 
-alter table walizka drop foreign key
-alter table izba drop foreign key izba
-#krok 3 - krok 2 tym razem się nie powiódł
-show create table przetwory
-#zad.2
-alter table postac add pesel CHAR(11) first;
-select * from postac;
-update postac set pesel=12345678912 where nazwa='Bjorn';
+## zadanie 2
+```
+ a)
+alter table postac add pesel char(11) first;
+update postac set pesel='11111111111' where id_postaci=1;
+update postac set pesel='22222222222' where id_postaci=2;
+update postac set pesel='33333333333' where id_postaci=3;
+update postac set pesel='55555555555' where id_postaci=5;
+update postac set pesel='77777777777' where id_postaci=7;
+update postac set pesel='88888888888' where id_postaci=8;
+alter table postac add primary key (pesel);
+ b)
+alter table postac modify rodzaj enum('viking','ptak','tesciowa','syrena');
+ c)
+insert into postac value('99999999999', 9, 'Gertruda Nieszczera', 'syrena', '1652-05-09', 62,null ,null);
+```
+## zadanie 3
+```
+ a)
+update postac set statek='statek1' where nazwa like '%a%';
+update postac set statek=null where nazwa='tesciowa';
+ b)
+update statek set max_ladownosc=max_ladownosc*0.7 where data_wod >1900;
+ c)
+alter table postac add check(wiek<='1000');
+```
+## zadanie 4
+```
+ a)
+insert into postac values(1010101010101,10,'Loko','waz','1000-01-01','99',null,null);
+ b)
+create table marynarz like postac;
+insert into marynarz select * from postac where statek is not null;
+ c)
+% klucze w table "marynarz" są takie jak w tabeli "postac"
+```
+## zadanie 5
+```
+ a)
+update postac set statek=null where statek is not null;
+ b) 
+delete from postac where id_postaci=7;
+ c)
+delete from statek;
+ d)
+alter table postac drop foreign key postac_ibfk_1;
+drop table statek;
+ e)
+create table zwierz(
+id int  auto_increment,
+nazwa varchar(45),
+wiek int,
+primary key(id)
+);
+ f)
+INSERT INTO zwierz (nazwa, wiek) SELECT nazwa, wiek FROM postac WHERE rodzaj = 'ptak' OR rodzaj = 'waz';
 
-
+```
