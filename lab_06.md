@@ -25,9 +25,8 @@ select rodzaj, sum(waga * ilosc) from zasob group by rodzaj;
 # HAVING to where z wartości agregującej
 # select rodzaj, sum(waga * ilosc) from zasob
 # having sum(waga*ilosc) > 100 group by rodzaj;
-select rodzaj, sum(waga * ilosc) as sum_waga from zasob
+select rodzaj, sum(waga * ilosc) as sum_waga from zasob 
 group by rodzaj having sum_waga > 100;
-
 #pkt 2
 select nazwa, avg(waga) from zasob where ilosc >= 4
 group by nazwa having sum(waga) > 10;
@@ -44,8 +43,34 @@ select* from ekwipunek where idKreatury = 1;
 select kreatura.idKreatury, nazwa, ekwipunek.idKreatury,
 idZasobu, ilosc from kreatura, ekwipunek where
 ekwipunek.idKreatury=kreatura.idKreatury;
+select k.idKreatury, nazwa, e.idKreatury,
+idZasobu, ilosc from kreatura k inner join ekwipunek e on
+e.idKreatury=k.idKreatury;
+select k.idKreatury, nazwa, e.idKreatury,
+idZasobu, ilosc from kreatura k inner join ekwipunek e on
+e.idKreatury=k.idKreatury inner join zasob z on z.idZasobu=e.idZasobu;
 
-select count(*) from ekwipunek;
-select 23*29;
+select idKreatury from Kreatura;
+select distinct idKreatury from ekwipunek;
+#podzapytanie
+select idKreatury from Kreatura where idLreatury not in 
+(select idKreatury from ekwipunek where idKreatury is not null); #tylko wtedygdy id kreatury is not null
+
+#left join
+select k.idKreatury, k.nazwa, e.idKreatury from kreatura k
+left join ekwipunek on k.idKreatury=e.idKreatury where e.idKreatury is null;
+
+#zadanie4
+#pkt1(nautral join)
+select * from kreatura natural join ekwipunek;
+#pkt2 złączanie: kreatura, ekwipunek, zasob
+#where na zasob (bo tylko jedzenie)
+#posortować (order by) + przyciąć wyniki (limit)
+select k.idKreatury
+#pkt 3 połązenie 
+select k1.idKreatury, k2.idKreatury, k1.nazwa, k2.nazwa 
+from kreatura k1
+inner join kreatura k2 in k1.idKreatury=k2.idKreatury;
+#zadanie 5 group by rodzaj ilosc ekwipunku (sum(ilosc))
 
 ```
