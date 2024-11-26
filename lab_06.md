@@ -1,4 +1,4 @@
-'''
+```
 select * from wikingowie.zasoby where rodzaj='';
 
 -- pkt 2
@@ -25,4 +25,6 @@ select rodzaj, sum(waga * ilosc) from zasob group by rodzaj;
 # HAVING to where z wartości agregującej
 # select rodzaj, sum(waga * ilosc) from zasob
 # having sum(waga*ilosc) > 100 group by rodzaj;
-'''
+select rodzaj, sum(waga * ilosc) as sum_waga from zasob
+group by rodzaj having sum_waga > 100;
+```
