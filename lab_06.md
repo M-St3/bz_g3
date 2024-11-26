@@ -27,4 +27,25 @@ select rodzaj, sum(waga * ilosc) from zasob group by rodzaj;
 # having sum(waga*ilosc) > 100 group by rodzaj;
 select rodzaj, sum(waga * ilosc) as sum_waga from zasob
 group by rodzaj having sum_waga > 100;
+
+#pkt 2
+select nazwa, avg(waga) from zasob where ilosc >= 4
+group by nazwa having sum(waga) > 10;
+#pkt3
+#select count(nazwa) from zasob;
+#select count(distinct nazwa) from zasob;
+#select count(distinct (nazwa)) from zasob; #to nie ma sensu (ale jest poprawnie zapisane)
+#select nazwa, rodzaj from zasob order by rodzaj;
+select rodzaj, count(distinct nazwa) from zasob group by rodzaj
+having sum(ilosc) > 1;
+#zadanie 3
+select idKreatury, nazwa from kreatura where idKreatury =1;
+select* from ekwipunek where idKreatury = 1;
+select kreatura.idKreatury, nazwa, ekwipunek.idKreatury,
+idZasobu, ilosc from kreatura, ekwipunek where
+ekwipunek.idKreatury=kreatura.idKreatury;
+
+select count(*) from ekwipunek;
+select 23*29;
+
 ```
