@@ -12,17 +12,26 @@ Select * from wikingowie.zasoby
 -- zad 5
 select * from wikingowie.zasob where rodzaj is null;
 select * from wikingowie.zasob where rodzaj != null;
-#Zadanie 1, pkt2
+```
+```
+#Zadanie 1
+#pkt.1
+select avg(waga) from wikingowie where rodzaj='wiking'; 
 #Wyświetl średnią wagę oraz liczbę kreatur dla każdego rodzaju
+#pkt.2
 select rodzaj, avg(waga), count(*) from kreatura group by rodzaj;
 #dwa sposoby na wyświetlenie średniej wieku dla każdego rodzaju kreatury
-select 2024 - year(dataUrodzenia) from kreatura;
-select year(now()) - year(dataUrodzenia) as wiek from kreatura;
+#pkt.3
+select 2024 - year(dataUr) from kreatura;
+select year(now()) - year(dataUr) as wiek from kreatura;
 # + funkcja avg + grupowanie
+```
+```
 #Zadanie 2
+#pkt1
 select rodzaj, sum(waga * ilosc) from zasob group by rodzaj;
 #pkt2
-# HAVING to where z wartości agregującej
+# HAVING - to where z wartości agregującej
 # select rodzaj, sum(waga * ilosc) from zasob
 # having sum(waga*ilosc) > 100 group by rodzaj;
 select rodzaj, sum(waga * ilosc) as sum_waga from zasob 
@@ -37,29 +46,34 @@ group by nazwa having sum(waga) > 10;
 #select nazwa, rodzaj from zasob order by rodzaj;
 select rodzaj, count(distinct nazwa) from zasob group by rodzaj
 having sum(ilosc) > 1;
+```
+```
 #zadanie 3
-select idKreatury, nazwa from kreatura where idKreatury =1;
-select* from ekwipunek where idKreatury = 1;
-select kreatura.idKreatury, nazwa, ekwipunek.idKreatury,
+#select idKreatury, nazwa from kreatura where idKreatury =1;
+#select* from ekwipunek where idKreatury = 1;
+kreatura.idKreatury, nazwa, ekwipunek.idKreatury,
 idZasobu, ilosc from kreatura, ekwipunek where
 ekwipunek.idKreatury=kreatura.idKreatury;
-select k.idKreatury, nazwa, e.idKreatury,
-idZasobu, ilosc from kreatura k inner join ekwipunek e on
-e.idKreatury=k.idKreatury;
-select k.idKreatury, nazwa, e.idKreatury,
-idZasobu, ilosc from kreatura k inner join ekwipunek e on
-e.idKreatury=k.idKreatury inner join zasob z on z.idZasobu=e.idZasobu;
+#pkt.1
+select kreatura.idKreatury, nazwa, ekwipunek.idKreatury,
+idZasobu, ilosc from kreatura inner join ekwipunek on
+ekwipunek.idKreatury=kreatura.idKreatury;
+#pkt.2
+select kreatura.idKreatury, zasob.nazwa, ekwipunek.idKreatury, kreatura.nazwa from kreatura
+inner join ekwipunek on ekwipunek.idKreatury=kreatura.idKreatury
+inner join zasob on zasob.idZasobu = ekwipunek.idZasobu;
 
-select idKreatury from Kreatura;
-select distinct idKreatury from ekwipunek;
+#select idKreatury from Kreatura;
+#select distinct idKreatury from ekwipunek;
 #podzapytanie
-select idKreatury from Kreatura where idLreatury not in 
-(select idKreatury from ekwipunek where idKreatury is not null); #tylko wtedygdy id kreatury is not null
-
+#select idKreatury from Kreatura where idLreatury not in 
+#(select idKreatury from ekwipunek where idKreatury is not null); #tylko wtedygdy id #kreatury is not null
 #left join
+#pkt.3
 select k.idKreatury, k.nazwa, e.idKreatury from kreatura k
 left join ekwipunek on k.idKreatury=e.idKreatury where e.idKreatury is null;
-
+```
+```
 #zadanie4
 #pkt1(nautral join)
 select * from kreatura natural join ekwipunek;
@@ -71,6 +85,8 @@ select k.idKreatury
 select k1.idKreatury, k2.idKreatury, k1.nazwa, k2.nazwa 
 from kreatura k1
 inner join kreatura k2 in k1.idKreatury=k2.idKreatury;
+```
+```
 #zadanie 5 group by rodzaj ilosc ekwipunku (sum(ilosc))
 
 ```
