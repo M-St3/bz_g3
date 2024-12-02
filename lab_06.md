@@ -1,18 +1,4 @@
-```
-select * from wikingowie.zasoby where rodzaj='';
 
--- pkt 2
--- funkcja concat()
--- select concat('Kreatura z i', id_kreatury/ ' to ' , nazwa)
-select concat('Kreatura z id',idKreatury, ' to ', nazwa) from wikingowie.kreatura;
-
--- from wikingowie.kreatura
--- pkt 3
-Select * from wikingowie.zasoby 
--- zad 5
-select * from wikingowie.zasob where rodzaj is null;
-select * from wikingowie.zasob where rodzaj != null;
-```
 ```
 #Zadanie 1
 #pkt.1
