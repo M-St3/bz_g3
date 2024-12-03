@@ -63,21 +63,37 @@ left join ekwipunek on k.idKreatury=e.idKreatury where e.idKreatury is null;
 #zadanie4
 #pkt1(nautral join)
 #select * from kreatura natural join ekwipunek;
-select kreatura.idKreatury, kreatura.nazwa, ekwipunek.idKreatury from kreatura
-left join ekwipunek on kreatura.idKreatury=ekwipunek.idkreatury where ekwipunek.idKreatury is null;
-#pkt2 złączanie: kreatura, ekwipunek, zasob
-#where na zasob (bo tylko jedzenie)
-#posortować (order by) + przyciąć wyniki (limit)
+
 select kreatura.nazwa, zasob.idZasobu from kreatura
 natural join ekwipunek
 inner join zasob on ekwipunek.idZasobu = zasob.idZasobu
 where kreatura.rodzaj='wiking' and dataUr between '1670.01.01' and '1680.01.01';
+
+#pkt2 złączanie: kreatura, ekwipunek, zasob
+#where na zasob (bo tylko jedzenie)
+#posortować (order by) + przyciąć wyniki (limit)
+
+select kreatura.nazwa, kreatura.dataUr, zasob.rodzaj from kreatura
+natural join ekwipunek
+inner join zasob on ekwipunek.idZasobu = zasob.idZasobu
+where zasob.rodzaj is not null
+order by kreatura.dataUr desc limit 5;
+
 #pkt 3 połązenie 
 select k1.idKreatury, k2.idKreatury, k1.nazwa, k2.nazwa 
 from kreatura k1
+where = 'k1.idKreatury' and 'k2.idKreatury' > 5
 inner join kreatura k2 in k1.idKreatury=k2.idKreatury;
 ```
 ```
 #zadanie 5 group by rodzaj ilosc ekwipunku (sum(ilosc))
-
+#pkt1
+select kreatura.rodzaj, avg(zasob.waga) from kreatura
+natural join ekwipunek
+inner join zasob on ekwipunek.idZasobu = zasob.idZasobu
+where not kreatura.rodzaj='malpa' and not 'waz'
+and ekwipunek.ilosc < 30
+group by kreatura.rodzaj;
+#pkt2
+select rodzaj, max(dataUr), min(dataUr) from kreatura group by rodzaj;
 ```
