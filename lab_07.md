@@ -1,10 +1,15 @@
 #Zadanie 1
 #pkt1
 ```sql
+create table etapy_wyprawy like wikingowie.etapy_wyprawy;
+insert into etapy_wyprawy select * from wikingowie.etapy_wyprawy;
+insert into kreatura select * from wikingowie.kreatura;
+create table uczestnicy like wikingowie.uczestnicy;
 create table sektor like wikingowie.sektor;
+insert into wyprawa select * from wikingowie.wyprawa;
+insert into uczestnicy select * from wikingowie.uczestnicy;
 insert into sektor select * from wikingowie.sektor;
 create table wyprawa like wikingowie.wyprawa;
-insert into wyprawa select * from wikingowie.wyprawa;
 ```
 use wikingowie;
 #Dla każdej wyprawy wypisz jej nazwę, liczbę uczestników,
