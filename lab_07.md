@@ -65,7 +65,12 @@ group by s.id_sektora
 
 #Zadanie 4
 #pkt 1
-select nazwa, length(nazwa) from kreatura;
+```
+select wyprawa.nazwa, length(etapy_wyprawy.dziennik)
+from wyprawa
+inner join etapy_wyprawy on wyprawa.id_wyprawy=etapy_wyprawy.idWyprawy
+having length(etapy_wyprawy.dziennik)<400;
+```
 #pkt2
 select sum((z.waga*e.ilosc)/count(u.id_uczestnicy)), u.wyprawa
 from wyprwawa w inner join uczestnicy u on w.id_wyprawy=u.id_wyprawy
