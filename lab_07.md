@@ -11,16 +11,6 @@ insert into uczestnicy select * from wikingowie.uczestnicy;
 insert into sektor select * from wikingowie.sektor;
 create table wyprawa like wikingowie.wyprawa;
 ```
-use wikingowie;
-#Dla każdej wyprawy wypisz jej nazwę, liczbę uczestników,
-# oraz nazwy tych uczestników w jednej lini
-# 1.Identyfikacja niezbędnych tabel
-select w.nazwa, count(k.nazwa), 
-group_concat(k.nazwa SEPARATOR '|') as liczba_uczestnikow
-from wyprawa w
-inner join uczestnicy u on w.id_wyprawy=u.id_wyprawry
-inner join kreatura k on k.idKreatury=u.id_uczestnika
-group by w.id_wyprawy;
 #pkt2
 ```sql
 select wyprawa.nazwa, kreatura.nazwa
@@ -30,10 +20,14 @@ right join kreatura on kreatura.idKreatury=uczestnicy.id_uczestnika
 where wyprawa.id_wyprawy is null;
 ```
 #pkt3
-select w.nazwa, sum(e.ilosc) 
-from wyprawa w
-inner join uczestnicy 
-
+```sql
+select wyprawa.nazwa, sum(ekwipunek.ilosc)
+from wyprawa 
+inner join uczestnicy on wyprawa.id_wyprawy=uczestnicy.id_wyprawy
+inner join kreatura on kreatura.idKreatury=uczestnicy.id_uczestnika
+inner join ekwipunek on ekwipunek.idKreatury=ekwipunek.idEkwipunku
+group by wyprawa.nazwa;
+```
 #Zadanie3
 #Pkt 1 ifnull
 select s.nazwa, ifnull(count(ew.sektor),'brak'), s.id_sektora
