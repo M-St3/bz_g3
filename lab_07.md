@@ -49,6 +49,13 @@ from sektor
 left join etapy_wyprawy on sektor.id_sektora=etapy_wyprawy.sektor
 group by sektor.id_sektora;
 ```
+#Pkt 2
+```
+select kreatura.nazwa, count(ifnull('nie ma wypraw', id_wyprawy ))
+from kreatura
+inner join uczestnicy on kreatura.idKreatury=uczestnicy.id_uczestnika
+group by kreatura.nazwa;
+```
 # z pełną funkcją if(warunek, wartość jeżeli true, ... false)
 select s.nazwa, 
 if(count(ew.sektor)=0,'nie był odwiedzany',count(distinct(ew.sektor))) as ile_odwiedzono s.id_sektora 
