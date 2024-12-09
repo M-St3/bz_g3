@@ -22,14 +22,13 @@ inner join uczestnicy u on w.id_wyprawy=u.id_wyprawry
 inner join kreatura k on k.idKreatury=u.id_uczestnika
 group by w.id_wyprawy;
 #pkt2
-#outer join
-#
-select w.nazwa, k.nazwa
-from wyprawa w 
-left join uczestnicy u on w.id_wyprawy=u.id_wyprawry
-left join kreatura k on k.idKreatury=u.id_uczestnika
-where w.id_wyprawy is null
-
+```sql
+select wyprawa.nazwa, kreatura.nazwa
+from wyprawa  
+right join uczestnicy on wyprawa.id_wyprawy=uczestnicy.id_wyprawy
+right join kreatura on kreatura.idKreatury=uczestnicy.id_uczestnika
+where wyprawa.id_wyprawy is null;
+```
 #pkt3
 select w.nazwa, sum(e.ilosc) 
 from wyprawa w
