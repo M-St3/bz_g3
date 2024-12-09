@@ -1,5 +1,11 @@
 #Zadanie 1
 #pkt1
+```sql
+create table sektor like wikingowie.sektor;
+insert into sektor select * from wikingowie.sektor;
+create table wyprawa like wikingowie.wyprawa;
+insert into wyprawa select * from wikingowie.wyprawa;
+```
 use wikingowie;
 #Dla każdej wyprawy wypisz jej nazwę, liczbę uczestników,
 # oraz nazwy tych uczestników w jednej lini
