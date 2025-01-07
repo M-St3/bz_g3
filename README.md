@@ -1,1 +1,2 @@
-# bz_g3
+# bazy danych io3
+Marcin Stępczyk
